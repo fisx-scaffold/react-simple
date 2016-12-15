@@ -1,0 +1,78 @@
+{
+  "name": "${#projectName#}",
+  "version": "1.0.0",
+  "description": "${#projectDescription=none#}",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "fisx server start",
+    "prod": "fisx server start --release",
+    "build": "rm -rf output && fisx release -c",
+    "release": "rm -rf output && fisx release prod -c"
+  },
+  "author": "",
+  "repository": "",
+  "license": "BSD",
+  "${#manifestKey#}": {
+    "requireConfig": {
+      "baseUrl": "src",
+      "paths": {
+        "babelHelpers": "babelHelpers"
+      },
+      "packages": [
+        {
+          "name": "react",
+          "main": "dist/react.min",
+          "devMain": "dist/react"
+        },
+        {
+          "name": "react-dom",
+          "main": "dist/react-dom.min",
+          "devMain": "dist/react-dom"
+        }
+      ]
+    },
+    "dependencies": {
+      "react": "^15.4.1",
+      "react-dom": "^15.4.1"
+    },
+    "lock": {
+      "react": {
+        "endpoint": "npm"
+      },
+      "react-dom": {
+        "endpoint": "npm"
+      }
+    },
+    "ignoreDependencies": [
+      "fbjs",
+      "loose-envify",
+      "object-assign"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.11.0",
+    "babel-core": "^6.18.2",
+    "babel-plugin-external-helpers": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "fis3-preprocessor-replacer": "^0.1.0",
+    "fisx-prepackager-babel": "^0.1.0",
+    "fisx-preprocessor-amd": "^0.1.1",
+    "fisx-preprocessor-babel": "^0.1.0",
+    "qrequire": "^0.2.0",
+    "rider": "^2.0.0",
+    "stylus": "^0.54.5"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react",
+      "stage-1"
+    ],
+    "plugins": [
+      "external-helpers"
+    ]
+  }
+}
