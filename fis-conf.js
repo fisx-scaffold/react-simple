@@ -20,7 +20,8 @@ fis.addIgnoreFiles([].concat(
         '/dep/react-dom/*',
         '/dep/react-dom/lib/**',
         '/dep/react/dist/react-with-*',
-        '/dep/react-dom/dist/react-dom-server*'
+        '/dep/react-dom/dist/react-dom-server*',
+        '/src/main.dev.js'
     ],
     isProduction ? devReactFiles : prodReactFiles
 ));

@@ -63,7 +63,8 @@
     "fisx-preprocessor-babel": "^0.1.0",
     "qrequire": "^0.2.0",
     "rider": "^2.0.0",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "react-hmr": "^0.1.0"
   },
   "babel": {
     "presets": [

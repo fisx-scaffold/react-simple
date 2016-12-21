@@ -24,6 +24,9 @@
 /* global proxyNoneExists:false */
 /* global requireConfigInjector:false */
 /* global autoresponse:false */
+/* global babelProcessor:false */
+/* global reactProcessor:false */
+/* global cjs2amd:false */
 
 exports.port = 8848;
 exports.directoryIndexes = true;
@@ -31,15 +34,16 @@ exports.documentRoot = __dirname;
 
 exports.getLocations = function () {
     var requireInjector = requireConfigInjector();
-    var babel = require('babel-core');
     var stylusParser = require('stylus');
-    var projectPkgMetaData = require('./package.json');
-    var babelHandlers = babelProcessor(babel, projectPkgMetaData.babel);
+    var babelHandlers = babelProcessor({
+        enableReactHMR: !fis.serveRelease
+    });
+    var reactHandlers = reactProcessor();
 
     var customHandlers = fis.serveRelease ? [] : [
+        reactHandlers.hmr,
         babelHandlers.babelHelper, babelHandlers.babel
     ];
-
     return [].concat(
         {
             location: /\/$/,
@@ -62,6 +66,19 @@ exports.getLocations = function () {
                 stylus(
                     require('./tool/stylus')(stylusParser, true)
                 )
+            ]
+        },
+
+        {
+            location: /\/src\/main\.js/,
+            handler: [
+                function (context) {
+                    var fs = require('fs');
+                    var mainFile = require.resolve('./src/main.dev');
+                    context.content = fs.readFileSync(mainFile);
+                },
+                babelHandlers.processESFile,
+                cjs2amd
             ]
         },
 
@@ -91,5 +108,16 @@ exports.injectRes = function (res) {
         if (res.hasOwnProperty(key)) {
             global[key] = res[key];
         }
+    }
+};
+
+// disable watchreload setting false
+exports.watchreload = {
+    hmr: {
+        entry: 'dev/react-hot-loader.js'
+    },
+    logLevel: 'debug',
+    fileTypes: {
+        script: 'js,vue'
     }
 };
