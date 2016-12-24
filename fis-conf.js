@@ -52,7 +52,7 @@ fis.require('parser-babel6').parser = babel;
 fis.match('/src/(**.js)', {
     parser: fis.plugin('babel6', {
         speed: true,
-        sourceMaps: !isProduction
+        sourceMaps: false
     }),
     preprocessor: [
         fis.plugin('babel'),
