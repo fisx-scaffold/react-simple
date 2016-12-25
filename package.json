@@ -58,6 +58,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
     "fis3-preprocessor-replacer": "^0.1.0",
+    "fis3-parser-babel6": "^0.1.2",
     "fisx-prepackager-babel": "^0.1.0",
     "fisx-preprocessor-amd": "^0.1.1",
     "fisx-preprocessor-babel": "^0.1.0",
