@@ -42,6 +42,10 @@ fis.match('index.html', {
 
 // 启用 amd 模块编译
 fis.hook('amd', {
+    // 声明动态模块 id：构建打包过程中动态创建的模块
+    dynamic: [
+        'babelHelpers'
+    ],
     config: fis.getModuleConfig()
 });
 
